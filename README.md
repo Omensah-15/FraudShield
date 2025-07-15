@@ -109,7 +109,7 @@ Two models were trained with **GridSearchCV** on hyperparameters and compared vi
 
 ## 📤 Standalone Prediction Script
 
-Use `predict_fraud.py` to run predictions on new transaction data.
+Use [`predict_fraud.py`](scripts/predict_fraud.py) to run predictions on new transaction data.
 
 ### 💻 Run Command:
 ```bash
