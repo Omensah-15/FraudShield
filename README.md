@@ -4,8 +4,8 @@
 
 - [Project Overview](#project-overview)
 - [Dataset Description](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#-dataset-overview)
-- [Notebook Walkthrough](notebooks/Fraud_Detection.ipynb)
-- [Exploratory Data Analysis (EDA)](https://github.com/Omensah-15/fraud-detection-pipeline/tree/main#-model-training--evaluation)
+- [Notebook Walkthrough](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#-project-goals)
+- [Exploratory Data Analysis (EDA)](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#%EF%B8%8F-step-3-exploratory-data-analysis-eda)
 - [Model Training & Evaluation](https://github.com/Omensah-15/fraud-detection-pipeline/tree/main#-model-training--evaluation)
 - [Prediction Script](https://github.com/Omensah-15/fraud-detection-pipeline/tree/main#-standalone-prediction-script)
 ---
