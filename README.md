@@ -85,7 +85,6 @@ Two models were trained with **GridSearchCV** on hyperparameters and compared vi
 | `feature_names.joblib` | Feature list for inference |
 | `encoder_*.joblib` | Label encoders for categorical variables |
 | `processed_transactions.xlsx` | Cleaned and prepared dataset |
-| `model_results.json` | All model evaluation metrics and params |
 
 ---
 
@@ -111,5 +110,4 @@ python scripts/predict_fraud.py
 
 **Obed Mensah**  
 *Data Scientist — Python | Power BI | SQL | Analytics*  
-📧 [heavenzlebron7@gmail.com](mailto:heavenzlebron7@gmail.com)  
-🔗 [GitHub](https://github.com/)
+📧 [heavenzlebron7@gmail.com](mailto:heavenzlebron7@gmail.com)
