@@ -9,6 +9,7 @@
 - [Model Training & Evaluation](https://github.com/Omensah-15/fraud-detection-pipeline/tree/main#-model-training--evaluation)
 - [How To Run This Project](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#-how-to-run-this-project)
 - [Prediction Script](https://github.com/Omensah-15/fraud-detection-pipeline/tree/main#-standalone-prediction-script)
+- [Author](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#-author)
 ---
 ## 📌 Project Overview
 
