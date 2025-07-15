@@ -112,7 +112,7 @@ Two models were trained with **GridSearchCV** on hyperparameters and compared vi
 ## 🚀 How to Run This Project
 
 ### 🧠 Train the Model
-- Open `notebooks/Fraud_Detection.ipynb`
+- Open [`notebooks/Fraud_Detection.ipynb`](https://github.com/Omensah-15/fraud-detection-pipeline/blob/c5878e97a5b62404becee0765b598dae8ab1fd87/notebooks/Fraud_Detection.ipynb)
 - Run all cells to load data, train the model, and save results
 
 ### 🔍 Predict on New Data
