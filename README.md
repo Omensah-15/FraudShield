@@ -1,18 +1,5 @@
 # 🕵️‍♂️ Fraud Detection Pipeline using Machine Learning
 
-## 📚 Table of Contents
-
-- [Project Overview](#project-overview)
-- [Dataset Description](#dataset-description)
-- [Installation & Requirements](#installation--requirements)
-- [Notebook Walkthrough](notebooks/Fraud_Detection.ipynb)
-- [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)
-- [Model Training & Evaluation](#model-training--evaluation)
-- [Prediction Script](scripts/predict_fraud.py)
-- [Output Files](#output-files)
-- [Sample Output Format](#sample-output-format)
-- [Author](#author)
-
 An end-to-end machine learning pipeline to detect fraudulent transactions in financial data. The system handles real-world complexities like imbalanced data, categorical encoding, feature scaling, and ensemble modeling. Designed for production-grade fraud analysis with a standalone prediction script.
 
 ---
