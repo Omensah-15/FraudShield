@@ -9,9 +9,17 @@
 - [Model Training & Evaluation](https://github.com/Omensah-15/fraud-detection-pipeline/tree/main#-model-training--evaluation)
 - [Prediction Script](https://github.com/Omensah-15/fraud-detection-pipeline/tree/main#-standalone-prediction-script)
 ---
-##Project Overview
+## 📌 Project Overview
 
-An end-to-end machine learning pipeline to detect fraudulent transactions in financial data. The system handles real-world complexities like imbalanced data, categorical encoding, feature scaling, and ensemble modeling. Designed for production-grade fraud analysis with a standalone prediction script.
+An end-to-end machine learning pipeline to detect fraudulent transactions in financial data.  
+This project is built to address real-world challenges such as:
+
+- ⚖️ Imbalanced class distribution  
+- 🧮 Categorical variable encoding  
+- 📊 Feature scaling and engineering  
+- 🔀 Ensemble modeling with Random Forest & XGBoost  
+
+It also includes a **production-ready prediction script** for fraud detection on new transaction data, making it suitable for deployment or batch processing in real-world systems.
 
 ---
 
