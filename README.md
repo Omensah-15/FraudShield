@@ -125,8 +125,6 @@ Two models were trained with **GridSearchCV** on hyperparameters and compared vi
 Use [`predict_fraud.py`](scripts/predict_fraud.py) to run predictions on new transaction data.
 
 ### 💻 Run Command:
-```bash
-python scripts/predict_fraud.py
 
 
 ## 📄 Sample Output Format
@@ -143,3 +141,4 @@ python scripts/predict_fraud.py
 **Obed Mensah**  
 *Data Scientist — Python | Power BI | SQL | Analytics*  
 📧 [heavenzlebron7@gmail.com](mailto:heavenzlebron7@gmail.com)
+
