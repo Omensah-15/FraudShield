@@ -107,6 +107,18 @@ Two models were trained with **GridSearchCV** on hyperparameters and compared vi
 
 ---
 
+## 🚀 How to Run This Project
+
+### 🧠 Train the Model
+- Open `notebooks/Fraud_Detection.ipynb`
+- Run all cells to load data, train the model, and save results
+
+### 🔍 Predict on New Data
+- Run the script:
+  ```bash
+  python predict.py
+
+
 ## 📤 Standalone Prediction Script
 
 Use [`predict_fraud.py`](scripts/predict_fraud.py) to run predictions on new transaction data.
