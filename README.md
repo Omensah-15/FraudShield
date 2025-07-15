@@ -38,7 +38,7 @@ All required packages are verified before execution:
 
 ### ✔️ Step 3: Exploratory Data Analysis (EDA)
 Saved plots:
-- [`eda_plots/fraud_distribution.png`]()
+- [`eda_plots/fraud_distribution.png`](eda_plots/fraud_distribution.png)
 - [`eda_plots/amount_distribution.png`](eda_plots/amount_distribution.png)
 - [`eda_plots/correlation_heatmap.png`](eda_plots/correlation_heatmap.png)
 
