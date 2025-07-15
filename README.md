@@ -2,7 +2,7 @@
 ---
 ## 📚 Table of Contents
 
-- [Project Overview](#project-overview)
+- [Project Overview](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#-project-overview)
 - [Dataset Description](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#-dataset-overview)
 - [Notebook Walkthrough](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#-project-goals)
 - [Exploratory Data Analysis (EDA)](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#%EF%B8%8F-step-3-exploratory-data-analysis-eda)
