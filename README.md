@@ -11,12 +11,12 @@
 - [Prediction Script](https://github.com/Omensah-15/fraud-detection-pipeline/tree/main#-standalone-prediction-script)
 - [Author](https://github.com/Omensah-15/fraud-detection-pipeline/blob/main/README.md#-author)
 ---
-## 📌 Project Overview
+## Project Overview
 
 An end-to-end machine learning pipeline to detect fraudulent transactions in financial data.  
 This project is built to address real-world challenges such as:
 
-- ⚖Imbalanced class distribution  
+- Imbalanced class distribution  
 - Categorical variable encoding  
 - Feature scaling and engineering  
 - Ensemble modeling with Random Forest & XGBoost  
@@ -25,7 +25,7 @@ It also includes a **production-ready prediction script** for fraud detection on
 
 ---
 
-## 📊 Dataset Overview
+## Dataset Overview
 
 This dataset consists of **51,000+ real-world inspired transactions**, each labeled as **fraudulent** or **legitimate**, and includes various transaction and user behavior features.
 
@@ -37,7 +37,7 @@ This dataset consists of **51,000+ real-world inspired transactions**, each labe
 
 ---
 
-## 🎯 Project Goals
+## Project Goals
 
 - Build a scalable fraud detection system using classical ML models.
 - Tackle **class imbalance** using SMOTE.
@@ -83,7 +83,7 @@ Two models were trained with **GridSearchCV** on hyperparameters and compared vi
 - **Recall (fraud class):** `0.1932`
 - Moderate performance, struggled with minority class.
 
-### ⚡XGBoost
+### XGBoost
 - **Accuracy:** `0.9294`
 - **Recall (fraud class):** `0.0299`
 - Much better overall accuracy, but poor recall on fraud.
