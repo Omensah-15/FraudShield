@@ -16,10 +16,10 @@
 An end-to-end machine learning pipeline to detect fraudulent transactions in financial data.  
 This project is built to address real-world challenges such as:
 
-- ⚖️ Imbalanced class distribution  
-- 🧮 Categorical variable encoding  
-- 📊 Feature scaling and engineering  
-- 🔀 Ensemble modeling with Random Forest & XGBoost  
+- ⚖Imbalanced class distribution  
+- Categorical variable encoding  
+- Feature scaling and engineering  
+- Ensemble modeling with Random Forest & XGBoost  
 
 It also includes a **production-ready prediction script** for fraud detection on new transaction data, making it suitable for deployment or batch processing in real-world systems.
 
@@ -29,7 +29,7 @@ It also includes a **production-ready prediction script** for fraud detection on
 
 This dataset consists of **51,000+ real-world inspired transactions**, each labeled as **fraudulent** or **legitimate**, and includes various transaction and user behavior features.
 
-### 🔍 Features:
+### Features:
 - `Transaction_Amount`, `Transaction_Type`, `Payment_Method`
 - `Device_Used`, `Location`, `Time_of_Transaction`
 - `Previous_Fraudulent_Transactions`, `Account_Age`, `Number_of_Transactions_Last_24H`
@@ -46,7 +46,7 @@ This dataset consists of **51,000+ real-world inspired transactions**, each labe
 
 ---
 
-## 🛠️ Pipeline Summary
+## Pipeline Summary
 
 ### ✔️ Step 1: Setup and Dependency Check
 All required packages are verified before execution:
@@ -74,21 +74,21 @@ Used **SMOTE** to oversample fraudulent cases and balance the training dataset.
 
 ---
 
-## 🤖 Model Training & Evaluation
+## Model Training & Evaluation
 
 Two models were trained with **GridSearchCV** on hyperparameters and compared via test accuracy, classification report, and ROC curve.
 
-### 🔢 Random Forest
+### Random Forest
 - **Accuracy:** `0.7857`
 - **Recall (fraud class):** `0.1932`
 - Moderate performance, struggled with minority class.
 
-### ⚡ XGBoost
+### ⚡XGBoost
 - **Accuracy:** `0.9294`
 - **Recall (fraud class):** `0.0299`
 - Much better overall accuracy, but poor recall on fraud.
 
-### 🧠 Ensemble (Voting Classifier)
+### Ensemble (Voting Classifier)
 - **Accuracy:** `0.9130`
 - Balanced prediction using RF + XGBoost
 
@@ -98,7 +98,7 @@ Two models were trained with **GridSearchCV** on hyperparameters and compared vi
 
 ---
 
-## 📦 Artifacts Saved
+## Artifacts Saved
 
 | File | Description |
 |------|-------------|
@@ -109,9 +109,9 @@ Two models were trained with **GridSearchCV** on hyperparameters and compared vi
 
 ---
 
-## 🚀 How to Run This Project
+## How to Run This Project
 
-### 🧠 Train the Model
+### Train the Model
 - Open [`notebooks/Fraud_Detection.ipynb`](https://github.com/Omensah-15/fraud-detection-pipeline/blob/c5878e97a5b62404becee0765b598dae8ab1fd87/notebooks/Fraud_Detection.ipynb)
 - Run all cells to load data, train the model, and save results
 
@@ -121,7 +121,7 @@ Two models were trained with **GridSearchCV** on hyperparameters and compared vi
   python predict.py
 
 
-## 📤 Standalone Prediction Script
+## Standalone Prediction Script
 
 Use [`predict_fraud.py`](scripts/predict_fraud.py) to run predictions on new transaction data.
 
