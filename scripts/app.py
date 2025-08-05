@@ -2,12 +2,14 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
 import logging
 import json
 import os
 from sklearn.preprocessing import StandardScaler
 from joblib import load
-from datetime import datetime
+from datetime import datetime, timedelta
+import shutil
 
 # Configure logging
 logging.basicConfig(
@@ -16,12 +18,36 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-# Directory for model artifacts
+# Directory and retention settings
 MODEL_DIR = os.getenv('MODEL_DIR', 'model_artifacts')
 PREDICTIONS_DIR = os.getenv('PREDICTIONS_DIR', 'predictions')
+RETENTION_DAYS = 7  # Delete predictions/logs older than 7 days
 
 # Streamlit page configuration
 st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide", page_icon="🛡️")
+
+def cleanup_old_files(directory, retention_days=RETENTION_DAYS):
+    """Delete files older than retention_days in the specified directory."""
+    try:
+        now = datetime.now()
+        for filename in os.listdir(directory):
+            file_path = os.path.join(directory, filename)
+            if os.path.isfile(file_path):
+                file_mtime = datetime.fromtimestamp(os.path.getmtime(file_path))
+                if now - file_mtime > timedelta(days=retention_days):
+                    os.remove(file_path)
+                    logging.info(f"Deleted old file: {file_path}")
+        # Clean up logs
+        log_file = 'fraud_detection_predict.log'
+        if os.path.exists(log_file):
+            log_mtime = datetime.fromtimestamp(os.path.getmtime(log_file))
+            if now - log_mtime > timedelta(days=retention_days):
+                with open(log_file, 'w'):  # Truncate log file
+                    pass
+                logging.info("Truncated old log file.")
+    except Exception as e:
+        logging.error(f"Failed to clean up old files: {str(e)}")
+        st.warning(f"Could not clean up old files: {str(e)}")
 
 def load_data(file=None):
     """Load transaction data from uploaded file or create a sample dataset."""
@@ -45,7 +71,7 @@ def load_data(file=None):
             logging.error(f"Error loading file {file.name}: {str(e)}")
             return None
     
-    # Create sample dataset if no file is uploaded
+    # Create sample dataset
     logging.info("Creating sample dataset.")
     np.random.seed(42)
     n_samples = 100
@@ -142,6 +168,13 @@ def predict_fraud(df):
             'Payment_Method': load(os.path.join(MODEL_DIR, 'encoder_Payment_Method.joblib'))
         }
         
+        # Load model metadata
+        metadata_path = os.path.join(MODEL_DIR, 'model_metadata.json')
+        metadata = {'Model': 'Unknown', 'Version': 'Unknown', 'Training_Date': 'Unknown'}
+        if os.path.exists(metadata_path):
+            with open(metadata_path, 'r') as f:
+                metadata = json.load(f)
+        
         # Preprocess data
         X, transaction_ids = preprocess_data(df, encoders, feature_names, scaler, precomputed_means, precomputed_modes)
         
@@ -160,29 +193,32 @@ def predict_fraud(df):
         
         # Save results
         os.makedirs(PREDICTIONS_DIR, exist_ok=True)
-        json_path = os.path.join(PREDICTIONS_DIR, 'predictions.json')
-        excel_path = os.path.join(PREDICTIONS_DIR, 'predictions.xlsx')
+        json_path = os.path.join(PREDICTIONS_DIR, f"predictions_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+        excel_path = os.path.join(PREDICTIONS_DIR, f"predictions_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx")
         results.to_json(json_path, orient='records', indent=4)
         results.to_excel(excel_path, index=False)
         
-        return results, json_path, excel_path
+        return results, json_path, excel_path, metadata
     except FileNotFoundError as e:
         logging.error(f"Model or artifact files not found: {str(e)}")
         st.error(f"Error: {str(e)}. Run Fraud_Detection.ipynb to train the model and save artifacts.")
-        return None, None, None
+        return None, None, None, None
     except Exception as e:
         logging.error(f"Fraud prediction failed: {str(e)}")
         st.error(f"Prediction failed: {str(e)}")
-        return None, None, None
+        return None, None, None, None
 
 def main():
     """Main function for Streamlit app."""
     st.title("🛡️ Fraud Detection Dashboard")
     st.markdown("""
         Upload a transaction dataset (CSV, JSON, or Excel) or use the sample dataset to predict fraudulent transactions.
-        Explore predictions with interactive filters and visualizations.
+        Explore predictions with interactive filters, visualizations, and top risky transactions.
     """)
 
+    # Clean up old files
+    cleanup_old_files(PREDICTIONS_DIR)
+    
     # Sidebar for file upload and filters
     st.sidebar.header("Data Input & Filters")
     uploaded_file = st.sidebar.file_uploader("Upload Transactions", type=['csv', 'json', 'xlsx', 'xls'])
@@ -193,16 +229,23 @@ def main():
         return
     
     # Predict fraud
-    results, json_path, excel_path = predict_fraud(df)
+    results, json_path, excel_path, metadata = predict_fraud(df)
     if results is None:
         return
+    
+    # Model metadata
+    st.sidebar.header("Model Metadata")
+    st.sidebar.write(f"**Model**: {metadata.get('Model', 'Unknown')}")
+    st.sidebar.write(f"**Version**: {metadata.get('Version', 'Unknown')}")
+    st.sidebar.write(f"**Training Date**: {metadata.get('Training_Date', 'Unknown')}")
     
     # Display summary
     st.header("Prediction Summary")
     fraud_count = len(results[results['Fraud_Prediction'] == 'Fraudulent'])
-    st.write(f"**Total Transactions**: {len(results)}")
-    st.write(f"**Fraudulent Transactions**: {fraud_count} ({fraud_count/len(results)*100:.2f}%)")
-    st.write(f"**Average Fraud Probability**: {results['Fraud_Probability'].mean():.4f}")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Total Transactions", len(results))
+    col2.metric("Fraudulent Transactions", f"{fraud_count} ({fraud_count/len(results)*100:.2f}%)")
+    col3.metric("Average Fraud Probability", f"{results['Fraud_Probability'].mean():.4f}")
     
     # Interactive filters
     st.sidebar.subheader("Filter Results")
@@ -214,13 +257,29 @@ def main():
         filtered_results = filtered_results[filtered_results['Fraud_Prediction'] == prediction_filter]
     filtered_results = filtered_results[filtered_results['Fraud_Probability'] >= probability_threshold]
     
-    # Display filtered results
-    st.header("Filtered Predictions")
-    st.dataframe(filtered_results, use_container_width=True)
+    # Top risky transactions
+    st.header("Top 5 Risky Transactions")
+    top_risky = results.sort_values(by='Fraud_Probability', ascending=False).head(5)
+    st.dataframe(top_risky, use_container_width=True)
+    
+    # Pie chart
+    st.header("Fraud Prediction Breakdown")
+    pie_data = results['Fraud_Prediction'].value_counts().reset_index()
+    pie_data.columns = ['Fraud_Prediction', 'Count']
+    fig_pie = px.pie(
+        pie_data,
+        names='Fraud_Prediction',
+        values='Count',
+        color='Fraud_Prediction',
+        color_discrete_map={'Fraudulent': '#FF4B4B', 'Legitimate': '#4CAF50'},
+        title="Breakdown of Fraudulent vs. Legitimate Transactions",
+        height=400
+    )
+    st.plotly_chart(fig_pie, use_container_width=True)
     
     # Bar chart visualization
     st.header("Fraud Probability Distribution")
-    fig = px.bar(
+    fig_bar = px.bar(
         filtered_results,
         x='Transaction_ID',
         y='Fraud_Probability',
@@ -230,8 +289,12 @@ def main():
         labels={'Fraud_Probability': 'Probability of Fraud', 'Transaction_ID': 'Transaction ID'},
         height=500
     )
-    fig.update_layout(xaxis={'tickangle': 45}, showlegend=True)
-    st.plotly_chart(fig, use_container_width=True)
+    fig_bar.update_layout(xaxis={'tickangle': 45}, showlegend=True)
+    st.plotly_chart(fig_bar, use_container_width=True)
+    
+    # Filtered results
+    st.header("Filtered Predictions")
+    st.dataframe(filtered_results, use_container_width=True)
     
     # Download buttons
     st.header("Download Results & Logs")
@@ -241,14 +304,14 @@ def main():
             st.download_button(
                 label="Download Predictions (JSON)",
                 data=f,
-                file_name=f"predictions_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                file_name=os.path.basename(json_path),
                 mime="application/json"
             )
         with open(excel_path, 'rb') as f:
             st.download_button(
                 label="Download Predictions (Excel)",
                 data=f,
-                file_name=f"predictions_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                file_name=os.path.basename(excel_path),
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
     with col2:
