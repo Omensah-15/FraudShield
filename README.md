@@ -60,7 +60,7 @@ pip install -r requirements.txt
 
 Usage
 
-### 1. Train the Model
+ 1. Train the Model
 
 * Launch Jupyter Notebook:
 
@@ -122,8 +122,8 @@ Currently not under a formal license. Intended for educational and non-commercia
 Acknowledgments
 
 * Built using Scikit-learn, Pandas, Streamlit, and Imbalanced-learn.
-
-## 👨‍💻 Author
+```
+👨‍💻 Author
 
 **Obed Mensah**  
 *Data Scientist — Python | Power BI | SQL | Analytics*  
