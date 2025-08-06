@@ -1,4 +1,4 @@
-# FraudShield: Fraud Detection Pipeline
+# 🛡FraudShield: Fraud Detection Pipeline
 
 **FraudShield** is a machine learning-powered fraud detection system designed to identify fraudulent transactions with high accuracy. It includes a complete pipeline for data preprocessing, model training, prediction, and an interactive dashboard for real-time insights.
 
@@ -33,7 +33,7 @@ Ensure the following before running the project:
    cd C:\YourPath\FraudShield
    pip install -r requirements.txt
 
-##👨‍💻 Author
+## 👨‍💻 Author
 
 **Obed Mensah**  
 *Data Scientist — Python | Power BI | SQL | Analytics*  
