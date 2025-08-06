@@ -1,0 +1,9 @@
+2025-08-06 10:01:31,293 - INFO - Starting data preprocessing...
+2025-08-06 10:01:31,293 - ERROR - Data preprocessing failed: 'str' object has no attribute 'groupby'
+2025-08-06 10:01:31,293 - ERROR - Fraud prediction failed: 'str' object has no attribute 'groupby'
+2025-08-06 10:24:17,598 - INFO - Dataset loaded successfully from data/sample_transactions.csv. Shape: (10024, 18)
+2025-08-06 10:24:17,698 - INFO - Starting data preprocessing...
+2025-08-06 10:24:31,087 - INFO - Missing values filled with precomputed means and modes.
+2025-08-06 10:24:31,187 - INFO - Scaled numerical columns: ['User_ID', 'Transaction_Amount', 'Time_of_Transaction', 'Previous_Fraudulent_Transactions', 'Account_Age', 'Number_of_Transactions_Last_24H', 'Transaction_Frequency', 'Amount_ZScore', 'Is_Night_Transaction', 'Transaction_Velocity', 'Location_Anomaly', 'Transaction_Acceleration', 'Device_Anomaly']
+2025-08-06 10:24:31,249 - INFO - Data preprocessing completed.
+2025-08-06 10:24:32,105 - INFO - Predicted 73 fraudulent transactions out of 10024.
