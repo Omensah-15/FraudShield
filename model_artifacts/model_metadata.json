@@ -1,0 +1,88 @@
+{
+    "Model": "RandomForestClassifier",
+    "Version": "4.0",
+    "Training_Date": "2025-08-05 17:15 GMT",
+    "Accuracy": 0.9474261771747805,
+    "Precision": 0.027777777777777776,
+    "Recall": 0.002028397565922921,
+    "F1-Score": 0.003780718336483932,
+    "ROC-AUC": 0.5024220101247494,
+    "Best_Parameters": {
+        "n_estimators": 100,
+        "min_samples_split": 2,
+        "min_samples_leaf": 1,
+        "max_features": "sqrt",
+        "max_depth": null,
+        "class_weight": "balanced"
+    },
+    "Feature_Importance": [
+        {
+            "Feature": "Previous_Fraudulent_Transactions",
+            "Importance": 0.24753197670173785
+        },
+        {
+            "Feature": "Number_of_Transactions_Last_24H",
+            "Importance": 0.11338581282486584
+        },
+        {
+            "Feature": "Time_of_Transaction",
+            "Importance": 0.09627971415013505
+        },
+        {
+            "Feature": "User_ID",
+            "Importance": 0.06164450921826188
+        },
+        {
+            "Feature": "Account_Age",
+            "Importance": 0.05659050026524085
+        },
+        {
+            "Feature": "Amount_ZScore",
+            "Importance": 0.05633026864453712
+        },
+        {
+            "Feature": "Transaction_Amount",
+            "Importance": 0.054487204055153574
+        },
+        {
+            "Feature": "Transaction_Acceleration",
+            "Importance": 0.054148325903146194
+        },
+        {
+            "Feature": "Transaction_Velocity",
+            "Importance": 0.054019686766131204
+        },
+        {
+            "Feature": "Transaction_Frequency",
+            "Importance": 0.05286139846318654
+        },
+        {
+            "Feature": "Location",
+            "Importance": 0.04341676785639183
+        },
+        {
+            "Feature": "Payment_Method",
+            "Importance": 0.038735138181408404
+        },
+        {
+            "Feature": "Transaction_Type",
+            "Importance": 0.032519137003729395
+        },
+        {
+            "Feature": "Device_Used",
+            "Importance": 0.02551496811787493
+        },
+        {
+            "Feature": "Is_Night_Transaction",
+            "Importance": 0.009877063903039876
+        },
+        {
+            "Feature": "Device_Anomaly",
+            "Importance": 0.002633276243147976
+        },
+        {
+            "Feature": "Location_Anomaly",
+            "Importance": 2.4251702011434717e-05
+        }
+    ]
+}
