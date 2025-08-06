@@ -1,4 +1,4 @@
-# 🕵️‍♂️ Fraud Detection Pipeline using Machine Learning
+# 🕵️‍♂️ FraudSheild
 ---
 ## 📚 Table of Contents
 
