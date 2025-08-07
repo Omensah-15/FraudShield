@@ -1,4 +1,3 @@
-
 import logging
 from datetime import datetime
 from joblib import load
@@ -12,8 +11,8 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-MODEL_DIR = 'model_artifacts'
-PREDICTIONS_DIR = 'predictions'
+MODEL_DIR = os.getenv('MODEL_DIR', 'model_artifacts')
+PREDICTIONS_DIR = os.getenv('PREDICTIONS_DIR', 'predictions')
 
 def load_data(file=None):
     if file is not None:
@@ -108,17 +107,19 @@ def preprocess_data(df, encoders, feature_names, scaler, precomputed_means, prec
 
 def predict_fraud(df=None):
     try:
+        # Updated to load compressed model file
         required_files = [
-            'ensemble_model.joblib', 'feature_names.joblib', 'scaler.joblib',
+            'ensemble_model.joblib.gz', 'feature_names.joblib', 'scaler.joblib',
             'precomputed_means.joblib', 'precomputed_modes.joblib',
             'encoder_Transaction_Type.joblib', 'encoder_Device_Used.joblib',
             'encoder_Location.joblib', 'encoder_Payment_Method.joblib'
         ]
         for file_name in required_files:
             if not os.path.exists(os.path.join(MODEL_DIR, file_name)):
-                raise FileNotFoundError(f'Required file {file_name} not found in {MODEL_DIR}.')
-        
-        model = load(os.path.join(MODEL_DIR, 'ensemble_model.joblib'))
+                raise FileNotFoundError(f'Required file {file_name} not found in {MODEL_DIR}. Please upload artifacts or run the training script.')
+
+        # Load compressed model
+        model = load(os.path.join(MODEL_DIR, 'ensemble_model.joblib.gz'))  # Handles .gz compression natively
         feature_names = load(os.path.join(MODEL_DIR, 'feature_names.joblib'))
         scaler = load(os.path.join(MODEL_DIR, 'scaler.joblib'))
         precomputed_means = load(os.path.join(MODEL_DIR, 'precomputed_means.joblib'))
@@ -167,7 +168,7 @@ def predict_fraud(df=None):
         raise
 
 if __name__ == '__main__':
-    # Example usage
+    # Example usage for local testing or GitHub Actions
     results, json_path, excel_path, metadata = predict_fraud('data/sample_transactions.csv')
     print('Prediction Results:')
     print(results.head())
