@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -140,16 +139,16 @@ def preprocess_data(df, encoders, feature_names, scaler, precomputed_means, prec
 def predict_fraud(df=None):
     try:
         required_files = [
-            'ensemble_model.joblib', 'feature_names.joblib', 'scaler.joblib',
+            'ensemble_model.joblib.gz', 'feature_names.joblib', 'scaler.joblib',
             'precomputed_means.joblib', 'precomputed_modes.joblib',
             'encoder_Transaction_Type.joblib', 'encoder_Device_Used.joblib',
             'encoder_Location.joblib', 'encoder_Payment_Method.joblib'
         ]
         for file_name in required_files:
             if not os.path.exists(os.path.join(MODEL_DIR, file_name)):
-                raise FileNotFoundError(f'Required file {file_name} not found in {MODEL_DIR}.')
+                raise FileNotFoundError(f'Required file {file_name} not found in {MODEL_DIR}. Please ensure the model is trained and artifacts are uploaded.')
         
-        model = load(os.path.join(MODEL_DIR, 'ensemble_model.joblib'))
+        model = load(os.path.join(MODEL_DIR, 'ensemble_model.joblib.gz'))  # Load compressed model
         feature_names = load(os.path.join(MODEL_DIR, 'feature_names.joblib'))
         scaler = load(os.path.join(MODEL_DIR, 'scaler.joblib'))
         precomputed_means = load(os.path.join(MODEL_DIR, 'precomputed_means.joblib'))
@@ -196,7 +195,7 @@ def predict_fraud(df=None):
         return results, json_path, excel_path, metadata
     except FileNotFoundError as e:
         logging.error(f'Model or artifact files not found: {str(e)}')
-        st.error(f'Error: {str(e)}. Run the training cell to generate artifacts.')
+        st.error(f'Error: {str(e)}. Ensure model artifacts are uploaded to {MODEL_DIR} or run the training notebook.')
         return None, None, None, None
     except Exception as e:
         logging.error(f'Fraud prediction failed: {str(e)}')
