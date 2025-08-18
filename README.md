@@ -1,37 +1,33 @@
-# 🛡FraudShield: Fraud Detection Pipeline
+# 🛡 FraudShield: Fraud Detection System
 
-**FraudShield** is a machine learning-powered fraud detection system designed to identify fraudulent transactions with high accuracy. It includes a complete pipeline for data preprocessing, model training, prediction, and an interactive dashboard for real-time insights.
+## 📌 Overview
+Machine learning pipeline for detecting fraudulent transactions with:
+- Advanced feature engineering
+- SMOTE-balanced RandomForest model
+- Interactive Streamlit dashboard
+- Real-time predictions
 
-## Project Overview
+## ✨ Key Features
+- Data preprocessing & feature engineering
+- Optimized RandomForestClassifier with SMOTE
+- Real-time prediction API
+- Interactive visualization dashboard
+- Comprehensive logging & reporting
 
-FraudShield detects fraudulent activities in transaction datasets using a RandomForestClassifier enhanced with SMOTE (Synthetic Minority Oversampling Technique) for class imbalance. The system features robust feature engineering, logging, and real-time visualization.
+## 🚀 Quick Start
 
-### Key Features
+```bash
+# 1. Clone & setup
+git clone https://github.com/yourusername/FraudShield.git
+cd FraudShield
+pip install -r requirements.txt
 
-- **Data Preprocessing**: Handles missing values and engineers features like `Transaction_Frequency`, `Amount_ZScore`, and `Is_Night_Transaction`.
-- **Model Training**: Trains a RandomForestClassifier with hyperparameter tuning and SMOTE.
-- **Interactive Dashboard**: Streamlit app for uploading files, visualizing predictions, and downloading results.
-- **Prediction Logging**: Saves prediction outputs in both JSON and Excel formats, including relevant metadata.
+# 2. Run dashboard
+streamlit run app/dashboard.py
 
-## Prerequisites
-
-Ensure the following before running the project:
-
-- **Python**: Version 3.8 or higher
-- **Dependencies**: Listed in `requirements.txt`
-
-## Installation
-
-1. **Set Up the Project Directory**
-   - Place the project in a directory, e.g.:
-     ```
-     C:\YourPath\FraudShield
-     ```
-
-2. **Install Dependencies**
-   ```bash
-   cd C:\YourPath\FraudShield
-   pip install -r requirements.txt
+# 3. Make predictions
+python src/predict.py --input data/sample.csv
+```
 
 ## 👨‍💻 Author
 
