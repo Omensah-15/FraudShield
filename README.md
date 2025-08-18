@@ -1,20 +1,20 @@
 # 🛡 FraudShield: Fraud Detection System
 
-## 📌 Overview
+## Overview
 Machine learning pipeline for detecting fraudulent transactions with:
 - Advanced feature engineering
 - SMOTE-balanced RandomForest model
 - Interactive Streamlit dashboard
 - Real-time predictions
 
-## ✨ Key Features
+## Key Features
 - Data preprocessing & feature engineering
 - Optimized RandomForestClassifier with SMOTE
 - Real-time prediction API
 - Interactive visualization dashboard
 - Comprehensive logging & reporting
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # 1. Clone & setup
