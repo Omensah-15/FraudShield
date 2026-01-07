@@ -19,7 +19,7 @@ cd FraudShield
 pip install -r requirements.txt
 
 # 2. Run dashboard
-streamlit run app/dashboard.py
+streamlit run app.py
 
 # 3. Make predictions
 python src/predict.py --input data/sample.csv
